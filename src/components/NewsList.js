@@ -50,6 +50,7 @@ export function NewsList() {
             totalResults={totalResults}
             url={article.url}
             urlToImage={article.urlToImage}
+            source={article.source.name}
           />
         );
       })}

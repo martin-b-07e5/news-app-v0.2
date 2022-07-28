@@ -9,6 +9,7 @@ const NewsItem = ({
   title,
   description,
   publishedAt,
+  source,
   urlToImage,
 }) => {
   return (
@@ -21,17 +22,18 @@ const NewsItem = ({
           </a>
         </h3>
         <p>{description}</p>
+
         {/* https://www.reactshark.com/blog/guide-react-date-format */}
         {/* https://github.com/date-fns/date-fns/blob/main/docs/upgradeGuide.md#string-arguments */}
         <p>
           Publicado el: {format(parseISO(publishedAt), "dd/mm/yyyy")} a las{" "}
-          {format(parseISO(publishedAt), "hh:mm")} hs.
+          {format(parseISO(publishedAt), "hh:mm")} hs. <br />
+          by {source}
         </p>
+
         <a href={urlToImage} target="_blank" rel="noreferrer">
           <img style={styles.image} src={urlToImage} alt={urlToImage} />
         </a>
-
-        <br />
       </div>
     </div>
   );

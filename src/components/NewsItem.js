@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./NewsItem.css";
+import styles from "./NewsItem.module.css";
 import { format, parseISO } from "date-fns";
 
 const NewsItem = ({

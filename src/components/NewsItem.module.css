@@ -1,0 +1,36 @@
+.news-app-content {
+    display: flex;
+    justify-content: center;
+    text-align: left;
+    margin: 1rem;
+    padding: 1rem;
+    border: 1px solid black;
+}
+
+.news-app-content img {
+    width: auto;
+    min-width: 200px;
+    max-width: 350px;
+}
+
+.news-img {
+    width: 400px;
+}
+
+
+/* https://create-react-app.dev/docs/adding-a-css-modules-stylesheet */
+
+.moviesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 230px);
+    gap: 40px;
+    padding: 40px;
+    justify-content: center;
+  }
+  
+  @media (max-width: 560px) {
+    .moviesGrid {
+      grid-template-columns: 100%;
+    }
+  }
+  

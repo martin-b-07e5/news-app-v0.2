@@ -39,11 +39,16 @@ export function Search() {
             setQuery({ search: value });
           }}
         />
-        <FaSearch
-          size={20}
+        {console.log(isValid)}
+        <button
           className={styles.searchButton}
-          disabled={!isValid}
-        />
+          type="submit"
+          // disabled={!isValid}
+          disabled={isValid}
+        >
+          <FaSearch size={20} />
+        </button>
+        {console.log(isValid)}
       </div>
     </form>
   );

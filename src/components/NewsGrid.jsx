@@ -1,10 +1,10 @@
+import "./NewsGrid.module.css";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import NewsItem from "./NewsItem";
-import "./NewsList.css";
+import NewsCard from "./NewsCard";
 
 // rf snippet
-export function NewsList() {
+export function NewsGrid() {
   const [articles, setArticles] = useState([]);
   const [totalResults, setTotalResults] = useState(0);
 
@@ -40,7 +40,7 @@ export function NewsList() {
       </p>
       {articles.map((article, index) => {
         return (
-          <NewsItem
+          <NewsCard
             article={article}
             articleLength={articles.length}
             description={article.description}

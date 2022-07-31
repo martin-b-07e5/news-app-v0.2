@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./NewsItem.module.css";
+import styles from "./NewsCard.module.css";
 import { format, parseISO } from "date-fns";
 
-const NewsItem = ({
+const NewsCard = ({
   //   articleLength,
   //   totalResults,
   url,
@@ -39,4 +39,4 @@ const NewsItem = ({
   );
 };
 
-export default NewsItem;
+export default NewsCard;

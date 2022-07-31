@@ -1,4 +1,4 @@
-import { NewsList } from "../components/NewsList";
+import { NewsGrid } from "../components/NewsGrid.jsx";
 import { Search } from "../components/Search";
 // import { useSearchParams } from "react-router-dom";
 // import { NewsGrid } from "../components/NewsGrid";
@@ -22,8 +22,7 @@ export function LandingPage() {
           agregar el infinite scroll, funcionaba solo desde la url)
       */}
 
-      <NewsList />
-
+      <NewsGrid />
       {/* <NewsGrid key={debouncedSearch} search={debouncedSearch} /> */}
       {/* 👆A NewsGrid, Le pasamos search por props.
       A la función NewsGrid le pasamos clave, valor. 

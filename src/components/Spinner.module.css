@@ -2,8 +2,10 @@
 
 /* centrar */
 .spinner {
-  display: flex;
+  display: grid;
   justify-content: center;
+  margin: 15px 10px 10px 10px;
+
 }
 
 .spinning {

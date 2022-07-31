@@ -1,6 +1,6 @@
 import styles from "./Search.module.css";
-import { useSearchParams } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
+import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 // rf snippet
@@ -30,25 +30,21 @@ export function Search() {
           className={styles.searchInput}
           type="search"
           placeholder="Input 3 or more characters"
-          aria-label="Search News"
           autoFocus={true}
           value={search ?? ""} // Si search es null o undefined, agarre "" por defecto
-          // onChange={(e) => setQuery(e.target.value)} // ver si esto funciona
           onChange={(e) => {
             const value = e.target.value;
             setQuery({ search: value });
           }}
         />
-        {console.log(isValid)}
         <button
           className={styles.searchButton}
           type="submit"
-          // disabled={!isValid}
-          disabled={isValid}
+          disabled={!isValid}
         >
           <FaSearch size={20} />
         </button>
-        {console.log(isValid)}
+        {console.log(isValid)} {/* cambia pero, no está ocultando btn*/}
       </div>
     </form>
   );

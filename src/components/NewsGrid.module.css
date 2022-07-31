@@ -1,10 +1,22 @@
-.article-container {
+/* https://create-react-app.dev/docs/adding-a-css-modules-stylesheet */
+
+.newsGrid {
     text-align: left;
     margin: 1rem;
+    padding: 10px 40px 10px 40px;
+    
+    justify-content: center;
+    /* align-self: right; */
 }
 
-.total-news {
-    margin: 1rem;
+.newsGrid img {
+    margin-left: 2%;
+    max-width: 95%;
+}
+
+.totalNews {
+    /* margin: 1rem; */
+    text-align: center;
     color: darkslategray;
     font-size: large;
     font-weight: bold;

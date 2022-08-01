@@ -4,7 +4,8 @@ import axios from "axios";
 import { Empty } from "./Empty";
 import { Spinner } from "./Spinner";
 import NewCard from "./NewCard";
-// import InfiniteScroll from "react-infinite-scroll-component";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { GetDataAPI } from "../services/getDataAPI";
 
 // rf snippet
 /* componente para hacer la grilla.
@@ -18,11 +19,13 @@ export function NewsGrid({ search }) {
   const [totalResults, setTotalResults] = useState(0);
   const [page, setPage] = useState(1); // trabajando s/esto
   const [hasMore, setHasMore] = useState(true); // p/infinite scroll
+  console.log("page: " + page);
 
   useEffect(() => {
-    if (search && search.length >= 3) {
+    if (search && search.length > 0) {
       setIsLoading(true); // para el spinner
-
+    }
+    if (search && search.length >= 3) {
       const getArticles = async () => {
         const response = await axios.get(
           // `https://newsapi.org/v2/everything?q=${search}&apiKey=af04d9e1481a41818db19c18914598ad&page=1&pageSize=10&language=es`,
@@ -30,7 +33,7 @@ export function NewsGrid({ search }) {
           {
             params: {
               q: search,
-              apiKey: "af04d9e1481a41818db19c18914598ad",
+              apiKey: "d2b71d9bb99a4725b1c3ba0d40163a73",
               page: 1,
               pageSize: 10,
               language: "es",
@@ -41,11 +44,8 @@ export function NewsGrid({ search }) {
         setTotalResults(response.data.totalResults);
         setIsLoading(false); // cdo se terminó de cargar articles(para el spinner)
 
-        // console.log("👀 response");
         // console.log(response);
-        // console.log("💡 response.data.totalResults");
         // console.log(response.data.totalResults);
-        // console.log("💡 response.data.articles.length");
         // console.log(response.data.articles.length);
       };
       getArticles();
@@ -60,11 +60,8 @@ export function NewsGrid({ search }) {
     return <Empty />;
   }
 
-  //   console.log("👇 articles");
   //   console.log(articles);
-  //   console.log("👇 articles.length");
   //   console.log(articles.length);
-  //   console.log("👀 articles.urlToImage");
   //   console.log(articles.urlToImage);
 
   return (

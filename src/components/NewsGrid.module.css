@@ -13,19 +13,13 @@
     grid-template-columns: 100%;
   }
 }
-/* -------------------------------------------------- */
-/* .newsGrid {
-  text-align: left;
-  margin: 1rem;
-  padding: 10px 40px 10px 40px;
-  
-  justify-content: center;
-}
-*/
 
 .newsGrid img {
   /* margin-left: 1%; */
-  max-width: 95%;
+  /* max-width: 100%; */
+  max-width: 250px;
+  height:160px;
+  border-radius: 10px;
 }
 
 .totalNews {

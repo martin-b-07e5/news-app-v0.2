@@ -23,6 +23,11 @@ export function Search() {
     console.log(search);
   };
 
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setQuery({ search: value });
+  };
+
   return (
     <form className={styles.searchContainer} onSubmit={handleSubmit}>
       <div className={styles.searchBox}>
@@ -32,13 +37,8 @@ export function Search() {
           placeholder="Input 3 or more characters"
           autoFocus={true}
           value={search ?? ""} // Si search es null o undefined, agarre "" por defecto.
-          onChange={(e) => {
-            const value = e.target.value;
-            setQuery({ search: value });
-          }}
+          onChange={handleChange}
         />
-        {/* {console.log(search)} */}
-
         <button
           className={styles.searchButton}
           type="submit"

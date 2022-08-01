@@ -19,7 +19,7 @@ export function NewsGrid({ search }) {
   const [totalResults, setTotalResults] = useState(0);
   const [page, setPage] = useState(1); // trabajando s/esto
   const [hasMore, setHasMore] = useState(true); // p/infinite scroll
-  console.log("page: " + page);
+  console.log("page: " + page); // shows the number page
 
   useEffect(() => {
     if (search && search.length > 0) {
@@ -43,19 +43,20 @@ export function NewsGrid({ search }) {
             },
           }
         );
-        setArticles(response.data.articles); // p/que no sobreescriba
+        // setArticles(response.data.articles);
         setTotalResults(response.data.totalResults);
+        // console.log("response:" + response);
+        // console.log("response.data.totalResults: " + response.data.totalResults);
+        // console.log("response.data.articles.length: " + response.data.articles.length);
         // ------------------------------
-        // setArticles((prevPage) => prevPage.concat(response.data.articles));
+        // setArticles(response.data.articles); // p/que no sobreescriba
+        setArticles((prevPage) => prevPage.concat(response.data.articles)); // con esto funciona InfiniteScroll
+        // ------------------------------
         // setHasMore(response.data.page < response.data.total_pages);
         // console.log("response.data.page: " + response.data.page);
         // console.log("response.data.total_pages: " + response.data.total_pages);
-
         // ------------------------------
         setIsLoading(false); // cdo se terminó de cargar articles(para el spinner)
-        // console.log(response);
-        // console.log(response.data.totalResults);
-        // console.log(response.data.articles.length);
       };
       getArticles();
       // ------------------------------------------------------------

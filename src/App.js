@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { MyNavBarComponent } from "./components/MyNavBarComponent";
 import { LandingPage } from "./pages/LandingPage";
 import { ErrorPage } from "./pages/ErrorPage";
-import { NewDetails } from "./pages/NewDetails";
 
 function App() {
   return (
@@ -21,17 +20,8 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/aboutUs" element={<AboutUs />} />
           <Route path="*" element={<ErrorPage />} />
-
-          {/* 👇usamos el COMPONENTE (cdo HACEMOS CLICK en una new)*/}
-          {/* al path le pasamos un parametro (:newId) que es dinámico 
-                y lo capturamos en NewDetails*/}
-          {/* "newId" es el identificador de la película */}
-          {/* https://reactrouter.com/docs/en/v6/hooks/use-params */}
-          <Route path="/news/:newId" element={<NewDetails />} />
         </Routes>
       </main>
-
-      {/* <NewsList /> */}
     </Router>
   );
 }

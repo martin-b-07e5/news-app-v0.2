@@ -5,20 +5,20 @@ import { useEffect, useState } from "react";
 
 // rf snippet
 export function Search() {
-  const [query, setQuery] = useSearchParams(); // setQuery me permite setear lo que paso por la url
-  const search = query.get("search"); // hook que captura lo que ingresamos en la busqueda
+  const [query, setQuery] = useSearchParams(); // setQuery me permite setear lo que paso por la url.
+  const search = query.get("search"); // hook que captura lo que ingresamos en la busqueda.
 
-  const [isValid, setIsValid] = useState(false); // hook ocultar btn
+  const [isValid, setIsValid] = useState(false); // hook ocultar btn.
   useEffect(() => {
     if (search != null) {
       if (search.length >= 3) {
-        setIsValid(true); // cdo search > x, p/habilitar btn
+        setIsValid(true); // cdo search > x, p/habilitar btn.
       } else setIsValid(false);
     }
   }, [search]);
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // dont't refressh the form when submit
+    e.preventDefault(); // dont't refressh the form when submit.
     console.log("👇 enter pressed");
     console.log(search);
   };
@@ -31,13 +31,13 @@ export function Search() {
           type="search"
           placeholder="Input 3 or more characters"
           autoFocus={true}
-          value={search ?? ""} // Si search es null o undefined, agarre "" por defecto
+          value={search ?? ""} // Si search es null o undefined, agarre "" por defecto.
           onChange={(e) => {
             const value = e.target.value;
             setQuery({ search: value });
           }}
         />
-        {console.log(search)}
+        {/* {console.log(search)} */}
 
         <button
           className={styles.searchButton}

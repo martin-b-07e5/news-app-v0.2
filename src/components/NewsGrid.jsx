@@ -33,13 +33,13 @@ export function NewsGrid({ search }) {
           {
             params: {
               q: search,
-              // apiKey: "af04d9e1481a41818db19c18914598ad",
-              apiKey: "d2b71d9bb99a4725b1c3ba0d40163a73",
-              // apiKey: "88589059d5eb4758aba90c7bdaab4932",
               // page: 1,
               page: page,
               pageSize: 10,
               language: "es",
+              // apiKey: "af04d9e1481a41818db19c18914598ad",  //acidb1
+              // apiKey: "d2b71d9bb99a4725b1c3ba0d40163a73", // ommaba
+              apiKey: "88589059d5eb4758aba90c7bdaab4932", // onlinetangoshop
             },
           }
         );

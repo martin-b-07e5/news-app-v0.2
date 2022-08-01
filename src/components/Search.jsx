@@ -8,12 +8,12 @@ export function Search() {
   const [query, setQuery] = useSearchParams(); // setQuery me permite setear lo que paso por la url
   const search = query.get("search"); // hook que captura lo que ingresamos en la busqueda
 
-  const [isValid, setIsValid] = useState(true); // hook ocultar btn
+  const [isValid, setIsValid] = useState(false); // hook ocultar btn
   useEffect(() => {
     if (search != null) {
       if (search.length >= 3) {
-        setIsValid(false); // cdo search > x, p/ocultar btn
-      }
+        setIsValid(true); // cdo search > x, p/habilitar btn
+      } else setIsValid(false);
     }
   }, [search]);
 
@@ -44,7 +44,7 @@ export function Search() {
         >
           <FaSearch size={20} />
         </button>
-        {console.log(isValid)} {/* cambia pero, no está ocultando btn*/}
+        {console.log(isValid)}
       </div>
     </form>
   );

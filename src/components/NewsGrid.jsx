@@ -5,7 +5,7 @@ import { Empty } from "./Empty";
 import { Spinner } from "./Spinner";
 import NewCard from "./NewCard";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { GetDataAPI } from "../services/getDataAPI";
+import { GetDataAPI } from "../services/GetDataAPI";
 
 // rf snippet
 /* componente para hacer la grilla.
@@ -26,6 +26,8 @@ export function NewsGrid({ search }) {
       setIsLoading(true); // para el spinner
     }
     if (search && search.length >= 3) {
+      // ------------------------------------------------------------
+      // viejo
       const getArticles = async () => {
         const response = await axios.get(
           // `https://newsapi.org/v2/everything?q=${search}&apiKey=af04d9e1481a41818db19c18914598ad&page=1&pageSize=10&language=es`,
@@ -33,24 +35,63 @@ export function NewsGrid({ search }) {
           {
             params: {
               q: search,
-              apiKey: "d2b71d9bb99a4725b1c3ba0d40163a73",
-              page: 1,
+              // apiKey: "af04d9e1481a41818db19c18914598ad",
+              // apiKey: "d2b71d9bb99a4725b1c3ba0d40163a73",
+              apiKey: "88589059d5eb4758aba90c7bdaab4932",
+              // page: 1,
+              page: page,
               pageSize: 10,
               language: "es",
             },
           }
         );
-        setArticles(response.data.articles);
+        // ------------------------------
+        setArticles(response.data.articles); // p/que no sobreescriba
+        console.log("response.data.articles: " + response.data.articles);
         setTotalResults(response.data.totalResults);
-        setIsLoading(false); // cdo se terminó de cargar articles(para el spinner)
+        console.log(
+          "response.data.totalResults: " + response.data.totalResults
+        );
+        // ------------------------------
+        // setArticles((prevPage) => prevPage.concat(response.data.articles));
+        // setHasMore(response.data.page < response.data.total_pages);
+        // console.log("response.data.page: " + response.data.page);
+        // console.log("response.data.total_pages: " + response.data.total_pages);
 
+        // ------------------------------
+        setIsLoading(false); // cdo se terminó de cargar articles(para el spinner)
         // console.log(response);
         // console.log(response.data.totalResults);
         // console.log(response.data.articles.length);
       };
       getArticles();
+      // ------------------------------------------------------------
+      // nuevo
+      // // ***** si no dice movie no funciona la query
+      // const searchUrl = search // operador ternario (hacer uno u otro)
+      //   ? "/search/article?query=" +
+      //     search +
+      //     "&apiKey" +
+      //     apiKey +
+      //     "&page=" +
+      //     page +
+      //     "&pageSize" +
+      //     pageSize +
+      //     "$language" +
+      //     language // Buscamos las que coincidan con la condición de busqueda
+      //   : "/discover/article?page=" + page;
+      // // si hay un cambio » ejecutamos una busqueda
+      // // 💡💡💡💡💡 searchUrl es el "argumento" a que le pasamos
+      // //  a la función get que tiene el "parametro" path. (ver httpClient.js)
+      // GetDataAPI(searchUrl).then((data) => {
+      //   // setNews(data.results);  // 👇p/que no sobreescriba
+      //   setArticles((prevNews) => prevNews.concat(data.results));
+      //   setHasMore(data.page < data.total_pages);
+      //   setIsLoading(false); // cdo se terminó de cargar news(p/ spinner)
+      // });
+      // ------------------------------------------------------------
     }
-  }, [search]);
+  }, [search, page]);
 
   if (isLoading) {
     return <Spinner />;
@@ -63,32 +104,38 @@ export function NewsGrid({ search }) {
   //   console.log(articles);
   //   console.log(articles.length);
   //   console.log(articles.urlToImage);
-
   return (
-    <div>
-      <div>
-        <p className={styles.totalNews}>
-          Está viendo {articles.length} noticias de {totalResults} resultados.
-        </p>
+    <InfiniteScroll
+      dataLength={articles.length}
+      hasMore={hasMore}
+      next={() => setPage((prevPage) => prevPage + 1)} // le pasamos una función
+      loader={<Spinner />}
+    >
+      <div id="gral">
+        <div id="totalNews">
+          <p className={styles.totalNews}>
+            Está viendo {articles.length} noticias de {totalResults} resultados.
+          </p>
+        </div>
+        <div id="newsGrid" className={styles.newsGrid}>
+          {articles.map((article, index) => {
+            return (
+              <NewCard
+                article={article}
+                articleLength={articles.length}
+                description={article.description}
+                key={index}
+                publishedAt={article.publishedAt}
+                title={article.title}
+                totalResults={totalResults}
+                url={article.url}
+                urlToImage={article.urlToImage}
+                source={article.source.name}
+              />
+            );
+          })}
+        </div>
       </div>
-      <div className={styles.newsGrid}>
-        {articles.map((article, index) => {
-          return (
-            <NewCard
-              article={article}
-              articleLength={articles.length}
-              description={article.description}
-              key={index}
-              publishedAt={article.publishedAt}
-              title={article.title}
-              totalResults={totalResults}
-              url={article.url}
-              urlToImage={article.urlToImage}
-              source={article.source.name}
-            />
-          );
-        })}
-      </div>
-    </div>
+    </InfiniteScroll>
   );
 }

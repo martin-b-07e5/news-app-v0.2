@@ -1,21 +1,20 @@
 import React from "react";
-import styles from "./NewCard.module.css";
 import { format, parseISO } from "date-fns";
 
 const NewCard = ({
   url,
+  urlToImage,
   title,
   description,
   publishedAt,
   source,
-  urlToImage,
 }) => {
   return (
     <div>
       <div>
         {/* <a href={urlToImage} target="_blank" rel="noreferrer"> */}
         <a href={url} target="_blank" rel="noreferrer">
-          <img style={styles.image} src={urlToImage} alt={urlToImage} />
+          <img src={urlToImage} alt={urlToImage} />
         </a>
 
         <h3>

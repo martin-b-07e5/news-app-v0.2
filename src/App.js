@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { MyNavBarComponent } from "./components/MyNavBarComponent";
 import { LandingPage } from "./pages/LandingPage";
 import { ErrorPage } from "./pages/ErrorPage";
-// import { NewsList } from "./components/NewsList";
+import { NewDetails } from "./pages/NewDetails";
 
 function App() {
   return (
@@ -27,7 +27,7 @@ function App() {
                 y lo capturamos en NewDetails*/}
           {/* "newId" es el identificador de la película */}
           {/* https://reactrouter.com/docs/en/v6/hooks/use-params */}
-          {/* <Route path="/news/:newId" element={<NewDetails />} /> */}
+          <Route path="/news/:newId" element={<NewDetails />} />
         </Routes>
       </main>
 

@@ -1,0 +1,9 @@
+/* https://create-react-app.dev/docs/adding-a-css-modules-stylesheet */
+
+.empty {
+  /* text-align: center; */
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 30px;
+}

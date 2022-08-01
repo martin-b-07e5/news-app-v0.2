@@ -37,6 +37,8 @@ export function Search() {
             setQuery({ search: value });
           }}
         />
+        {console.log(search)}
+
         <button
           className={styles.searchButton}
           type="submit"
@@ -44,7 +46,7 @@ export function Search() {
         >
           <FaSearch size={20} />
         </button>
-        {console.log(isValid)}
+        {/* {console.log(isValid)} */}
       </div>
     </form>
   );

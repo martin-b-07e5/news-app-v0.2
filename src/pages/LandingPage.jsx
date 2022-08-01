@@ -1,13 +1,12 @@
-import { NewsGrid } from "../components/NewsGrid.jsx";
+import { useSearchParams } from "react-router-dom";
 import { Search } from "../components/Search";
-// import { useSearchParams } from "react-router-dom";
-// import { NewsGrid } from "../components/NewsGrid";
-// import { useDebounce } from "../hooks/useDebounce";
+import { NewsGrid } from "../components/NewsGrid";
+import { useDebounce } from "../hooks/useDebounce";
 
 export function LandingPage() {
-  // const [query] = useSearchParams(); // capturamos lo que pusimos en el search, de la url(search input en este caso)
-  // const search = query.get("search"); // este search lo que hace es, cdo cbia la busqueda » se crea de nuevo el componente.
-  // const debouncedSearch = useDebounce(search, 500); // autosearch
+  const [query] = useSearchParams(); // capturamos lo que pusimos en el search, de la url(search input en este caso)
+  const search = query.get("search"); // este search lo que hace es, cdo cbia la busqueda » se crea de nuevo el componente.
+  const debouncedSearch = useDebounce(search, 500); // autosearch
 
   return (
     <div>
@@ -22,8 +21,7 @@ export function LandingPage() {
           agregar el infinite scroll, funcionaba solo desde la url)
       */}
 
-      <NewsGrid />
-      {/* <NewsGrid key={debouncedSearch} search={debouncedSearch} /> */}
+      <NewsGrid key={debouncedSearch} search={debouncedSearch} />
       {/* 👆A NewsGrid, Le pasamos search por props.
       A la función NewsGrid le pasamos clave, valor. 
       La clave valor llega al componente en forma de objeto.

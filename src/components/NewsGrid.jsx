@@ -1,8 +1,10 @@
 import styles from "./NewsGrid.module.css";
 import { useEffect, useState } from "react";
+// import InfiniteScroll from "react-infinite-scroll-component";
 import axios from "axios";
-import NewCard from "./NewCard";
+import { Empty } from "./Empty";
 import { Spinner } from "./Spinner";
+import NewCard from "./NewCard";
 
 // rf snippet
 /* componente para hacer la grilla.
@@ -20,18 +22,18 @@ export function NewsGrid({ search }) {
 
       const getArticles = async () => {
         const response = await axios.get(
-          `https://newsapi.org/v2/everything?q=bitcoin&apiKey=af04d9e1481a41818db19c18914598ad&page=1&pageSize=10&language=es`
+          `https://newsapi.org/v2/everything?q={search}&apiKey=af04d9e1481a41818db19c18914598ad&page=1&pageSize=10&language=es`
         );
         setArticles(response.data.articles);
         setTotalResults(response.data.totalResults);
         setIsLoading(false); // cdo se terminó de cargar articles(para el spinner)
 
-        //   console.log("👀 response");
-        //   console.log(response);
-        //   console.log("💡 response.data.totalResults");
-        //   console.log(response.data.totalResults);
-        //   console.log("💡 response.data.articles.length");
-        //   console.log(response.data.articles.length);
+        // console.log("👀 response");
+        // console.log(response);
+        // console.log("💡 response.data.totalResults");
+        // console.log(response.data.totalResults);
+        // console.log("💡 response.data.articles.length");
+        // console.log(response.data.articles.length);
       };
       getArticles();
     }
@@ -39,6 +41,10 @@ export function NewsGrid({ search }) {
 
   if (isLoading) {
     return <Spinner />;
+  }
+
+  if (!isLoading && articles.length === 0) {
+    return <Empty />;
   }
 
   //   console.log("👇 articles");

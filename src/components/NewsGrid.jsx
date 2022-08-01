@@ -1,10 +1,11 @@
 import styles from "./NewsGrid.module.css";
 import { useEffect, useState } from "react";
-// import InfiniteScroll from "react-infinite-scroll-component";
 import axios from "axios";
 import { Empty } from "./Empty";
 import { Spinner } from "./Spinner";
 import NewCard from "./NewCard";
+// import InfiniteScroll from "react-infinite-scroll-component";
+import { getDataAPI } from "../utils/httpClient";
 
 // rf snippet
 /* componente para hacer la grilla.
@@ -22,7 +23,7 @@ export function NewsGrid({ search }) {
 
       const getArticles = async () => {
         const response = await axios.get(
-          `https://newsapi.org/v2/everything?q={search}&apiKey=af04d9e1481a41818db19c18914598ad&page=1&pageSize=10&language=es`
+          `https://newsapi.org/v2/everything?q=${search}&apiKey=af04d9e1481a41818db19c18914598ad&page=1&pageSize=10&language=es`
         );
         setArticles(response.data.articles);
         setTotalResults(response.data.totalResults);

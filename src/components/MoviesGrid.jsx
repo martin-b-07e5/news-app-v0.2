@@ -1,11 +1,11 @@
 import styles from "./MoviesGrid.module.css";
 import { useEffect, useState } from "react";
-import { get } from "../utils/httpClient";
 import { MovieCard } from "./MovieCard";
 import { Spinner } from "./Spinner";
 // import { useQuery } from "../hooks/useQuery";
 // https://www.npmjs.com/package/react-infinite-scroll-component
 import InfiniteScroll from "react-infinite-scroll-component";
+import { get } from "../utils/httpClient";
 
 /* componente para hacer la grilla.
 https://developers.themoviedb.org/3/getting-started/authentication

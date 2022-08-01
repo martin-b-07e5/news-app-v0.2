@@ -1,36 +1,36 @@
 /* https://create-react-app.dev/docs/adding-a-css-modules-stylesheet */
 
-/* .newsGrid {
-    text-align: left;
-    margin: 1rem;
-    padding: 10px 40px 10px 40px;
-    
-    justify-content: center;
-}
-*/
-
-.totalNews {
-    text-align: center;
-    color: darkslategray;
-    font-size: large;
-    font-weight: bold;
-}
-
 .newsGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 230px);
-    gap: 40px;
-    padding: 40px;
-    justify-content: center;
-}
-
-.newsGrid img {
-    /* margin-left: 1%; */
-    max-width: 95%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 230px);
+  gap: 40px;
+  padding: 40px;
+  justify-content: center;
 }
 
 @media (max-width: 560px) {
   .newsGrid {
     grid-template-columns: 100%;
   }
+}
+/* -------------------------------------------------- */
+/* .newsGrid {
+  text-align: left;
+  margin: 1rem;
+  padding: 10px 40px 10px 40px;
+  
+  justify-content: center;
+}
+*/
+
+.newsGrid img {
+  /* margin-left: 1%; */
+  max-width: 95%;
+}
+
+.totalNews {
+    text-align: center;
+    color: darkslategray;
+    font-size: large;
+    font-weight: bold;
 }

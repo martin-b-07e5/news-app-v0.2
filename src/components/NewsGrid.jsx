@@ -5,7 +5,6 @@ import { Empty } from "./Empty";
 import { Spinner } from "./Spinner";
 import NewCard from "./NewCard";
 // import InfiniteScroll from "react-infinite-scroll-component";
-import { getDataAPI } from "../utils/httpClient";
 
 // rf snippet
 /* componente para hacer la grilla.
@@ -13,17 +12,30 @@ https://developers.themoviedb.org/3/getting-started/authentication
 💡💡💡💡💡destructuramos al ponerle el parametro {search},
  que es el argumento que viene desde LandingPage */
 export function NewsGrid({ search }) {
+  // us snippet
   const [articles, setArticles] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [totalResults, setTotalResults] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
+  const [page, setPage] = useState(1); // trabajando s/esto
+  const [hasMore, setHasMore] = useState(true); // p/infinite scroll
 
   useEffect(() => {
-    if (!search || search.length === 0 || search.length >= 3) {
+    if (search && search.length >= 3) {
       setIsLoading(true); // para el spinner
 
       const getArticles = async () => {
         const response = await axios.get(
-          `https://newsapi.org/v2/everything?q=${search}&apiKey=af04d9e1481a41818db19c18914598ad&page=1&pageSize=10&language=es`
+          // `https://newsapi.org/v2/everything?q=${search}&apiKey=af04d9e1481a41818db19c18914598ad&page=1&pageSize=10&language=es`,
+          `https://newsapi.org/v2/everything?`,
+          {
+            params: {
+              q: search,
+              apiKey: "af04d9e1481a41818db19c18914598ad",
+              page: 1,
+              pageSize: 10,
+              language: "es",
+            },
+          }
         );
         setArticles(response.data.articles);
         setTotalResults(response.data.totalResults);
@@ -56,26 +68,30 @@ export function NewsGrid({ search }) {
   //   console.log(articles.urlToImage);
 
   return (
-    <div className={styles.newsGrid}>
-      <p className={styles.totalNews}>
-        Está viendo {articles.length} noticias de {totalResults} resultados.
-      </p>
-      {articles.map((article, index) => {
-        return (
-          <NewCard
-            article={article}
-            articleLength={articles.length}
-            description={article.description}
-            key={index}
-            publishedAt={article.publishedAt}
-            title={article.title}
-            totalResults={totalResults}
-            url={article.url}
-            urlToImage={article.urlToImage}
-            source={article.source.name}
-          />
-        );
-      })}
+    <div>
+      <div>
+        <p className={styles.totalNews}>
+          Está viendo {articles.length} noticias de {totalResults} resultados.
+        </p>
+      </div>
+      <div className={styles.newsGrid}>
+        {articles.map((article, index) => {
+          return (
+            <NewCard
+              article={article}
+              articleLength={articles.length}
+              description={article.description}
+              key={index}
+              publishedAt={article.publishedAt}
+              title={article.title}
+              totalResults={totalResults}
+              url={article.url}
+              urlToImage={article.urlToImage}
+              source={article.source.name}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }

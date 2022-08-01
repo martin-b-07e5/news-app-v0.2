@@ -2,7 +2,6 @@ import styles from "./NewDetails.module.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"; // esto es un hook
 import { Spinner } from "../components/Spinner";
-// import { getDataAPI } from "../utils/httpClient";
 import { getDataAPI } from "../services/getDataAPI";
 import { getNewImg } from "../utils/getNewImg";
 

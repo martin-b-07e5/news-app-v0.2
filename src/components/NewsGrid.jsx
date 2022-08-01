@@ -26,8 +26,6 @@ export function NewsGrid({ search }) {
       setIsLoading(true); // para el spinner
     }
     if (search && search.length >= 3) {
-      // ------------------------------------------------------------
-      // viejo
       const getArticles = async () => {
         const response = await axios.get(
           // `https://newsapi.org/v2/everything?q=${search}&apiKey=af04d9e1481a41818db19c18914598ad&page=1&pageSize=10&language=es`,
@@ -36,8 +34,8 @@ export function NewsGrid({ search }) {
             params: {
               q: search,
               // apiKey: "af04d9e1481a41818db19c18914598ad",
-              // apiKey: "d2b71d9bb99a4725b1c3ba0d40163a73",
-              apiKey: "88589059d5eb4758aba90c7bdaab4932",
+              apiKey: "d2b71d9bb99a4725b1c3ba0d40163a73",
+              // apiKey: "88589059d5eb4758aba90c7bdaab4932",
               // page: 1,
               page: page,
               pageSize: 10,
@@ -45,13 +43,8 @@ export function NewsGrid({ search }) {
             },
           }
         );
-        // ------------------------------
         setArticles(response.data.articles); // p/que no sobreescriba
-        console.log("response.data.articles: " + response.data.articles);
         setTotalResults(response.data.totalResults);
-        console.log(
-          "response.data.totalResults: " + response.data.totalResults
-        );
         // ------------------------------
         // setArticles((prevPage) => prevPage.concat(response.data.articles));
         // setHasMore(response.data.page < response.data.total_pages);

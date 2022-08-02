@@ -32,13 +32,12 @@ export function NewsGrid({ search }) {
           {
             params: {
               q: search,
-              // page: 1,
-              page: page,
+              page: page, // page: 1,
               pageSize: 10,
               language: "es",
               // apiKey: "af04d9e1481a41818db19c18914598ad",  //acidb1
-              apiKey: "d2b71d9bb99a4725b1c3ba0d40163a73", // ommaba
-              // apiKey: "88589059d5eb4758aba90c7bdaab4932", // onlinetangoshop
+              // apiKey: "d2b71d9bb99a4725b1c3ba0d40163a73", // ommaba
+              apiKey: "88589059d5eb4758aba90c7bdaab4932", // onlinetangoshop
             },
           }
         );
@@ -49,53 +48,34 @@ export function NewsGrid({ search }) {
         setIsLoading(false); // cdo se terminó de cargar articles(para el spinner)
       };
       getArticles();
-      // ------------------------------------------------------------
-      // ver REEMPLAZAR const getArticles, POR ESTO
-      // // operador ternario (hacer uno u otro)
-      // // `https://newsapi.org/v2/everything?
-      // // q=${search}&apiKey=af04d9e1481a41818db19c18914598ad&page=1&pageSize=10&language=es`,
-
-      // const searchUrl = search
-      //   ? search + "&page=" + page // Buscamos las que coincidan con la condición de busqueda
-      //   : "/discover/everything?page=" + page;
-      // // si hay un cambio » ejecutamos una busqueda
-      // // 💡💡💡💡💡 searchUrl es el "argumento" a que le pasamos
-      // //  a la función GetDataAPI que tiene el "parametro" path. (ver httpClient.js)
-      // GetDataAPI(searchUrl).then((data) => {
-      //   // setArticles(data.results);  // 👇p/que no sobreescriba
-      //   // setArticles((prevNews) => prevNews.concat(response.data.results));
-      //   setArticles((prevNews) => prevNews.concat(data.results));
-      //   // setHasMore(response.data.page < data.total_pages);
-      //   setHasMore(data.page < data.total_pages);
-      //   setIsLoading(false); // cdo se terminó de cargar news(p/ spinner)
-      // });
-      // ------------------------------------------------------------
     }
   }, [search, page]);
 
-  if (isLoading) {
-    return <Spinner />;
-  }
+  // lo metí en el InfiniteScroll como una propiedad
+  // if (isLoading) {
+  //   return <Spinner />;
+  // console.log("isLoadin is assigned a value but never used.🔥");
+  // }
 
   if (!isLoading && articles.length === 0) {
     return <Empty />;
   }
 
-  // console.log("articles.length: " + articles.length);
-  // console.log("articles: " + articles);
+  console.log("articles.length: " + articles.length);
+  console.log("articles: " + articles);
+  console.log("page: " + page);
   console.log("hasMore: " + hasMore);
+
   return (
     <InfiniteScroll
       dataLength={articles.length}
       hasMore={hasMore}
+      // 👇siempre que actualizamos el estado, a partir de un estado anterior »
+      // » usar una función. (no usar "page" en este caso)
+      // Porque la actualización se hace de forma asíncrona » puede dar errores.
       next={() => setPage((prevPage) => prevPage + 1)} // le pasamos una función
       loader={<Spinner />}
     >
-      {/* <ul className={styles.newsGrid}>
-        {articles.map((item) => (
-          <NewCard key={item.id} item={item} />
-        ))}
-      </ul> */}
       <div id="gral">
         <div id="totalNews">
           <p className={styles.totalNews}>

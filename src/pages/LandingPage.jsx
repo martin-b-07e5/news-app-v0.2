@@ -6,7 +6,7 @@ import { useDebounce } from "../hooks/useDebounce";
 export function LandingPage() {
   const [query] = useSearchParams(); // capturamos lo que pusimos en el search, de la url(search input en este caso)
   const search = query.get("search"); // este search lo que hace es, cdo cbia la busqueda » se crea de nuevo el componente.
-  const debouncedSearch = useDebounce(search, 500); // autosearch
+  const debouncedSearch = useDebounce(search, 900); // autosearch
 
   return (
     <div>

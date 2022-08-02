@@ -5,7 +5,7 @@ import { Empty } from "./Empty";
 import { Spinner } from "./Spinner";
 import NewCard from "./NewCard";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { GetDataAPI } from "../services/GetDataAPI";
+import GetDataAPI from "../services/GetDataAPI";
 
 // rf snippet
 /* componente para hacer la grilla.
@@ -19,7 +19,6 @@ export function NewsGrid({ search }) {
   const [totalResults, setTotalResults] = useState(0);
   const [page, setPage] = useState(1); // trabajando s/esto
   const [hasMore, setHasMore] = useState(true); // p/infinite scroll
-  console.log("page: " + page); // shows the number page
 
   useEffect(() => {
     if (search && search.length > 0) {
@@ -51,17 +50,23 @@ export function NewsGrid({ search }) {
       };
       getArticles();
       // ------------------------------------------------------------
-      // reemplazar const getArticles, por esto
-      // const searchUrl = search // operador ternario (hacer uno u otro)
-      //   ? "/search/everything?q=" + search + "&page=" +  page + "&pageSize" +  pageSize + "$language" + language "&apiKey" +  apiKey  // Buscamos las que coincidan con la condición de busqueda
+      // ver REEMPLAZAR const getArticles, POR ESTO
+      // // operador ternario (hacer uno u otro)
+      // // `https://newsapi.org/v2/everything?
+      // // q=${search}&apiKey=af04d9e1481a41818db19c18914598ad&page=1&pageSize=10&language=es`,
+
+      // const searchUrl = search
+      //   ? search + "&page=" + page // Buscamos las que coincidan con la condición de busqueda
       //   : "/discover/everything?page=" + page;
       // // si hay un cambio » ejecutamos una busqueda
       // // 💡💡💡💡💡 searchUrl es el "argumento" a que le pasamos
       // //  a la función GetDataAPI que tiene el "parametro" path. (ver httpClient.js)
       // GetDataAPI(searchUrl).then((data) => {
       //   // setArticles(data.results);  // 👇p/que no sobreescriba
-      //   setArticles((prevNews) => prevNews.concat(response.data.results));
-      //   setHasMore(response.data.page < data.total_pages);
+      //   // setArticles((prevNews) => prevNews.concat(response.data.results));
+      //   setArticles((prevNews) => prevNews.concat(data.results));
+      //   // setHasMore(response.data.page < data.total_pages);
+      //   setHasMore(data.page < data.total_pages);
       //   setIsLoading(false); // cdo se terminó de cargar news(p/ spinner)
       // });
       // ------------------------------------------------------------
@@ -86,6 +91,11 @@ export function NewsGrid({ search }) {
       next={() => setPage((prevPage) => prevPage + 1)} // le pasamos una función
       loader={<Spinner />}
     >
+      {/* <ul className={styles.newsGrid}>
+        {articles.map((item) => (
+          <NewCard key={item.id} item={item} />
+        ))}
+      </ul> */}
       <div id="gral">
         <div id="totalNews">
           <p className={styles.totalNews}>

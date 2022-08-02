@@ -51,6 +51,7 @@ export function NewsGrid({ search }) {
       };
       getArticles();
       // ------------------------------------------------------------
+      // reemplazar const getArticles, por esto
       // const searchUrl = search // operador ternario (hacer uno u otro)
       //   ? "/search/everything?q=" + search + "&page=" +  page + "&pageSize" +  pageSize + "$language" + language "&apiKey" +  apiKey  // Buscamos las que coincidan con la condición de busqueda
       //   : "/discover/everything?page=" + page;
@@ -75,9 +76,9 @@ export function NewsGrid({ search }) {
     return <Empty />;
   }
 
-  //   console.log(articles);
-  //   console.log(articles.length);
-  //   console.log(articles.urlToImage);
+  // console.log("articles.length: " + articles.length);
+  // console.log("articles: " + articles);
+  console.log("hasMore: " + hasMore);
   return (
     <InfiniteScroll
       dataLength={articles.length}

@@ -5,7 +5,7 @@ import { Empty } from "./Empty";
 import { Spinner } from "./Spinner";
 import NewCard from "./NewCard";
 import InfiniteScroll from "react-infinite-scroll-component";
-import GetDataAPI from "../services/GetDataAPI";
+// import GetDataAPI from "../services/GetDataAPI";
 
 // rf snippet
 /* componente para hacer la grilla.
@@ -17,8 +17,15 @@ export function NewsGrid({ search }) {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [totalResults, setTotalResults] = useState(0);
-  const [page, setPage] = useState(1); // trabajando s/esto
-  const [hasMore, setHasMore] = useState(true); // p/infinite scroll
+  const [page, setPage] = useState(1);
+  const [hasMore] = useState(true); // p/infinite scroll
+
+  const URL = `https://newsapi.org/v2/everything?`;
+  const PAGESIZE = 10;
+  const LANGUAGE = "es";
+  // const API_KEY = "af04d9e1481a41818db19c18914598ad"; //acidb1
+  // const API_KEY = "d2b71d9bb99a4725b1c3ba0d40163a73"; // ommaba
+  const API_KEY = "88589059d5eb4758aba90c7bdaab4932"; // onlinetangoshop
 
   useEffect(() => {
     if (search && search.length > 0) {
@@ -28,30 +35,28 @@ export function NewsGrid({ search }) {
       const getArticles = async () => {
         const response = await axios.get(
           // `https://newsapi.org/v2/everything?q=${search}&apiKey=af04d9e1481a41818db19c18914598ad&page=1&pageSize=10&language=es`,
-          `https://newsapi.org/v2/everything?`,
+          // `https://newsapi.org/v2/everything?`,
+          URL,
           {
             params: {
               q: search,
               page: page, // page: 1,
-              pageSize: 10,
-              language: "es",
-              // apiKey: "af04d9e1481a41818db19c18914598ad",  //acidb1
-              // apiKey: "d2b71d9bb99a4725b1c3ba0d40163a73", // ommaba
-              apiKey: "88589059d5eb4758aba90c7bdaab4932", // onlinetangoshop
+              pageSize: PAGESIZE,
+              language: LANGUAGE,
+              apiKey: API_KEY,
             },
           }
         );
         setTotalResults(response.data.totalResults);
-        // setArticles(response.data.articles);
-        setArticles((prevPage) => prevPage.concat(response.data.articles)); // con esto funciona InfiniteScroll
-        // setHasMore(response.data.page < response.data.totalResults / 10); // no esta funcionando con esto
+        setArticles((prevPage) => prevPage.concat(response.data.articles)); // ahora funciona InfiniteScroll
+        // setHasMore(response.data.page < response.data.totalResults / 10); // en esta api, no funciona esto.
         setIsLoading(false); // cdo se terminó de cargar articles(para el spinner)
       };
       getArticles();
     }
-  }, [search, page]);
+  }, [search, page, URL]);
 
-  // lo metí en el InfiniteScroll como una propiedad
+  // Lo metí en el InfiniteScroll como una propiedad (si lo dejo acá » me lleva arriba en cada cambio pag)
   // if (isLoading) {
   //   return <Spinner />;
   // console.log("isLoadin is assigned a value but never used.🔥");

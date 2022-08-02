@@ -1,11 +1,11 @@
 import styles from "./NewsGrid.module.css";
 import { useEffect, useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { Empty } from "./Empty";
 import { Spinner } from "./Spinner";
 import NewCard from "./NewCard";
 import InfiniteScroll from "react-infinite-scroll-component";
-// import GetDataAPI from "../services/GetDataAPI";
+import GetDataAPI from "../services/GetDataAPI";
 
 // rf snippet
 /* componente para hacer la grilla.
@@ -20,12 +20,10 @@ export function NewsGrid({ search }) {
   const [page, setPage] = useState(1);
   const [hasMore] = useState(true); // p/infinite scroll
 
-  const URL = `https://newsapi.org/v2/everything?`;
+  /* const URL = `https://newsapi.org/v2/everything?`;
   const PAGESIZE = 10;
   const LANGUAGE = "es";
-  // const API_KEY = "af04d9e1481a41818db19c18914598ad"; //acidb1
-  // const API_KEY = "d2b71d9bb99a4725b1c3ba0d40163a73"; // ommaba
-  const API_KEY = "88589059d5eb4758aba90c7bdaab4932"; // onlinetangoshop
+  const API_KEY = "af04d9e1481a41818db19c18914598ad"; //acidb1 */
 
   useEffect(() => {
     if (search && search.length > 0) {
@@ -33,9 +31,8 @@ export function NewsGrid({ search }) {
     }
     if (search && search.length >= 3) {
       const getArticles = async () => {
-        const response = await axios.get(
-          // `https://newsapi.org/v2/everything?q=${search}&apiKey=af04d9e1481a41818db19c18914598ad&page=1&pageSize=10&language=es`,
-          // `https://newsapi.org/v2/everything?`,
+        const response = await GetDataAPI(search, page); // ahora utilizo este response » muevo cod comentado 👆👇 a GetDataAPI
+        /* const response = await axios.get(
           URL,
           {
             params: {
@@ -46,14 +43,15 @@ export function NewsGrid({ search }) {
               apiKey: API_KEY,
             },
           }
-        );
+        ); */
+
         setTotalResults(response.data.totalResults);
         setArticles((prevPage) => prevPage.concat(response.data.articles)); // ahora funciona InfiniteScroll
         setIsLoading(false); // cdo se terminó de cargar articles(para el spinner)
       };
       getArticles();
     }
-  }, [search, page, URL]);
+  }, [search, page]);
 
   if (!isLoading && articles.length === 0) {
     return <Empty />;
@@ -84,14 +82,14 @@ export function NewsGrid({ search }) {
           {articles.map((article, index) => {
             return (
               <NewCard
-                article={article}
                 key={index}
+                article={article}
+                articleLength={articles.length}
                 totalResults={totalResults}
                 title={article.title}
                 description={article.description}
                 publishedAt={article.publishedAt}
                 source={article.source.name}
-                articleLength={articles.length}
                 url={article.url}
                 urlToImage={article.urlToImage}
               />

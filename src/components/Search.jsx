@@ -12,7 +12,7 @@ export function Search() {
   useEffect(() => {
     if (search != null) {
       if (search.length >= 3) {
-        setIsValid(true); // cdo search > x, p/habilitar btn.
+        setIsValid(true); // cdo search > 3, p/habilitar btn.
       } else setIsValid(false);
     }
   }, [search]);

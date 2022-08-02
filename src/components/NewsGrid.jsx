@@ -49,18 +49,11 @@ export function NewsGrid({ search }) {
         );
         setTotalResults(response.data.totalResults);
         setArticles((prevPage) => prevPage.concat(response.data.articles)); // ahora funciona InfiniteScroll
-        // setHasMore(response.data.page < response.data.totalResults / 10); // en esta api, no funciona esto.
         setIsLoading(false); // cdo se terminó de cargar articles(para el spinner)
       };
       getArticles();
     }
   }, [search, page, URL]);
-
-  // Lo metí en el InfiniteScroll como una propiedad (si lo dejo acá » me lleva arriba en cada cambio pag)
-  // if (isLoading) {
-  //   return <Spinner />;
-  // console.log("isLoadin is assigned a value but never used.🔥");
-  // }
 
   if (!isLoading && articles.length === 0) {
     return <Empty />;

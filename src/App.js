@@ -18,6 +18,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/buscador" element={<LandingPage />} />
           <Route path="/aboutUs" element={<AboutUs />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>

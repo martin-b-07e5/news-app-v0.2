@@ -29,7 +29,11 @@ export function Search() {
   };
 
   return (
-    <form className={styles.searchContainer} onSubmit={handleSubmit}>
+    <form
+      className={styles.searchContainer}
+      onSubmit={handleSubmit}
+      role="search"
+    >
       <div className={styles.searchBox}>
         <input
           className={styles.searchInput}

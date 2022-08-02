@@ -27,12 +27,18 @@ const NewCard = ({
 
         {/* https://www.reactshark.com/blog/guide-react-date-format */}
         {/* https://github.com/date-fns/date-fns/blob/main/docs/upgradeGuide.md#string-arguments */}
+        {/* https://date-fns.org/v2.29.1/docs/format      */}
         <p>
           <b>Publicado el </b>
-          {format(parseISO(publishedAt), "dd/mm/yyyy")}
+          {/* Day of month » dd	» 01, 02, ..., 31
+          Month (formatting) » MM	» 01, 02, ..., 12
+          Calendar year » yyyy	» 0044, 0001, 1900, 2017 */}
+          {format(parseISO(publishedAt), "dd/MM/yyyy")}
           <br />
           <b> a las </b>
-          {format(parseISO(publishedAt), "hh:mm")} hs.
+          {/* Hour [0-23] » HH	» 00, 01, 02, ..., 23
+          Minute » mm	» 00, 01, ..., 59 */}
+          {format(parseISO(publishedAt), "HH:mm")} hs.
           <br />
           <b>by </b>
           {source}

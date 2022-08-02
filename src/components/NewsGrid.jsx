@@ -38,49 +38,29 @@ export function NewsGrid({ search }) {
               pageSize: 10,
               language: "es",
               // apiKey: "af04d9e1481a41818db19c18914598ad",  //acidb1
-              // apiKey: "d2b71d9bb99a4725b1c3ba0d40163a73", // ommaba
-              apiKey: "88589059d5eb4758aba90c7bdaab4932", // onlinetangoshop
+              apiKey: "d2b71d9bb99a4725b1c3ba0d40163a73", // ommaba
+              // apiKey: "88589059d5eb4758aba90c7bdaab4932", // onlinetangoshop
             },
           }
         );
-        // setArticles(response.data.articles);
         setTotalResults(response.data.totalResults);
-        // console.log("response:" + response);
-        // console.log("response.data.totalResults: " + response.data.totalResults);
-        // console.log("response.data.articles.length: " + response.data.articles.length);
-        // ------------------------------
-        // setArticles(response.data.articles); // p/que no sobreescriba
+        // setArticles(response.data.articles);
         setArticles((prevPage) => prevPage.concat(response.data.articles)); // con esto funciona InfiniteScroll
-        // ------------------------------
-        // setHasMore(response.data.page < response.data.total_pages);
-        // console.log("response.data.page: " + response.data.page);
-        // console.log("response.data.total_pages: " + response.data.total_pages);
-        // ------------------------------
+        // setHasMore(response.data.page < response.data.totalResults / 10); // no esta funcionando con esto
         setIsLoading(false); // cdo se terminó de cargar articles(para el spinner)
       };
       getArticles();
       // ------------------------------------------------------------
-      // nuevo
-      // // ***** si no dice movie no funciona la query
       // const searchUrl = search // operador ternario (hacer uno u otro)
-      //   ? "/search/article?query=" +
-      //     search +
-      //     "&apiKey" +
-      //     apiKey +
-      //     "&page=" +
-      //     page +
-      //     "&pageSize" +
-      //     pageSize +
-      //     "$language" +
-      //     language // Buscamos las que coincidan con la condición de busqueda
-      //   : "/discover/article?page=" + page;
+      //   ? "/search/everything?q=" + search + "&page=" +  page + "&pageSize" +  pageSize + "$language" + language "&apiKey" +  apiKey  // Buscamos las que coincidan con la condición de busqueda
+      //   : "/discover/everything?page=" + page;
       // // si hay un cambio » ejecutamos una busqueda
       // // 💡💡💡💡💡 searchUrl es el "argumento" a que le pasamos
-      // //  a la función get que tiene el "parametro" path. (ver httpClient.js)
+      // //  a la función GetDataAPI que tiene el "parametro" path. (ver httpClient.js)
       // GetDataAPI(searchUrl).then((data) => {
-      //   // setNews(data.results);  // 👇p/que no sobreescriba
-      //   setArticles((prevNews) => prevNews.concat(data.results));
-      //   setHasMore(data.page < data.total_pages);
+      //   // setArticles(data.results);  // 👇p/que no sobreescriba
+      //   setArticles((prevNews) => prevNews.concat(response.data.results));
+      //   setHasMore(response.data.page < data.total_pages);
       //   setIsLoading(false); // cdo se terminó de cargar news(p/ spinner)
       // });
       // ------------------------------------------------------------
@@ -116,15 +96,15 @@ export function NewsGrid({ search }) {
             return (
               <NewCard
                 article={article}
-                articleLength={articles.length}
-                description={article.description}
                 key={index}
-                publishedAt={article.publishedAt}
-                title={article.title}
                 totalResults={totalResults}
+                title={article.title}
+                description={article.description}
+                publishedAt={article.publishedAt}
+                source={article.source.name}
+                articleLength={articles.length}
                 url={article.url}
                 urlToImage={article.urlToImage}
-                source={article.source.name}
               />
             );
           })}

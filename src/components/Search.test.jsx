@@ -27,17 +27,33 @@ Esto da un 100% de cobertura de esta prueba.
 jest.mock("react-router-dom", () => ({
   useSearchParams: () => [
     {
-      get: () => "prueba",
-      // "analizamos que vamos a devolver " +
-      // "» Esto devuelve un objeto, que tiene una función, que retorna un string",
+      get: () =>
+        "analizamos que vamos a devolver " +
+        "» Esto devuelve un objeto, que tiene una función, que retorna un string",
     },
     jest.fn(),
   ],
 }));
 describe("<Search />", () => {
-  it("Debe renderizarse", () => {
+  it("Debe renderizarse by teacher", () => {
     render(<Search />); // renderizamos el component
     const buscador = screen.getByRole("search"); // obtenemos el rtdo
     expect(buscador).toBeInTheDocument();
   });
+});
+
+jest.mock("react-router-dom", () => ({
+  useSearchParams: () => [
+    {
+      get: () =>
+        "analizamos que vamos a devolver " +
+        "» Esto devuelve un objeto, que tiene una función, que retorna un string",
+    },
+    jest.fn(),
+  ],
+}));
+test("Render component by me", () => {
+  render(<Search />); // renderizamos el componente
+  const result = screen.getByRole("search"); // obtenemos el rtdo
+  expect(result).toBeInTheDocument(); // testeamos rtdo que sea true
 });

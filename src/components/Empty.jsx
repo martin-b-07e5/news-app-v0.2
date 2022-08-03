@@ -2,5 +2,9 @@ import styles from "./Empty.module.css";
 
 // rf snippet
 export function Empty() {
-  return <div className={styles.empty}>No Results</div>;
+  return (
+    <div data-testid="empty" className={styles.empty}>
+      No Results
+    </div>
+  );
 }

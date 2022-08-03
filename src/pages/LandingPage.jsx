@@ -10,7 +10,7 @@ export function LandingPage() {
 
   return (
     <div>
-      <Search />
+      <Search data-testid="Search" />
       {/* Si cambio la key de un componente »
         » react automaticamente destruye el componente y lo vuelve a crear.
         Nos sirve para resetear en NewsGrid los estados de: movies, isLoading,

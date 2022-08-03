@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export function MyNavBarComponent() {
   return (
-    <div className="myNabvar--pendingStyle">
+    <div data-testid="my-navbar-component" className="myNabvar--pendingStyle">
       <nav>
         <ul>
           <li>

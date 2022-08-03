@@ -78,7 +78,7 @@ export function NewsGrid({ search }) {
             Está viendo {articles.length} noticias de {totalResults} resultados.
           </p>
         </div>
-        <div id="newsGrid" className={styles.newsGrid}>
+        <div data-testid="newsGrid" id="newsGrid" className={styles.newsGrid}>
           {articles.map((article, index) => {
             return (
               <NewCard

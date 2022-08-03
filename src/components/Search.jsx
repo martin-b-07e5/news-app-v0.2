@@ -47,6 +47,7 @@ export function Search() {
           className={styles.searchButton}
           type="submit"
           disabled={!isValid}
+          data-testid="button"
         >
           <FaSearch size={20} />
         </button>

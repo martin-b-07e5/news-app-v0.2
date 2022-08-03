@@ -24,6 +24,7 @@ La dependencia externa "react-router-dom" la metemos adentro de la función
 Esto da un 100% de cobertura de esta prueba.
  */
 
+// ----------------------------------------------------------------------
 jest.mock("react-router-dom", () => ({
   useSearchParams: () => [
     {
@@ -35,13 +36,13 @@ jest.mock("react-router-dom", () => ({
   ],
 }));
 describe("<Search />", () => {
-  it("Debe renderizarse by teacher", () => {
+  it("Debe renderizarse", () => {
     render(<Search />); // renderizamos el component
     const buscador = screen.getByRole("search"); // obtenemos el rtdo
     expect(buscador).toBeInTheDocument();
   });
 });
-
+// ----------------------------------------------------------------------
 jest.mock("react-router-dom", () => ({
   useSearchParams: () => [
     {
@@ -52,8 +53,14 @@ jest.mock("react-router-dom", () => ({
     jest.fn(),
   ],
 }));
-test("Render component by me", () => {
+test("Render component Search", () => {
   render(<Search />); // renderizamos el componente
   const result = screen.getByRole("search"); // obtenemos el rtdo
   expect(result).toBeInTheDocument(); // testeamos rtdo que sea true
+});
+// ----------------------------------------------------------------------
+test("button toBeEnabled", () => {
+  render(<Search />); // renderizamos el componente
+  const result = screen.getByTestId("button"); // obtenemos el rtdo
+  expect(result).toBeEnabled(); // testeamos rtdo que sea true
 });
